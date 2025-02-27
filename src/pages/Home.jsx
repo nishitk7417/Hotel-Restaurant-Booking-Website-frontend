@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const Home = () => {
   return (
     <div className="bg-white w-[100%] min-h-screen border-4">
-      {/* Hero Section */}
+      
       <section
         className="bg-cover bg-center h-[500px] flex items-center justify-center"
         style={{ backgroundImage: "url('https://cdn.pixabay.com/photo/2022/09/21/17/02/blue-background-7470781_1280.jpg')" }}
@@ -15,7 +15,7 @@ const Home = () => {
           <p className="text-gray-200 mt-4 text-lg">
             Discover and book the best hotels & restaurants near you.
           </p>
-          <div className="mt-6">
+          <div className="mt-6 flex">
             <Link
               to="/hotels"
               className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition"
@@ -32,7 +32,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Popular Hotels & Restaurants */}
       <section className="py-16 max-w-7xl mx-auto px-6">
         <h2 className="text-3xl font-bold text-gray-800 text-center">Popular Choices</h2>
         <p className="text-center text-gray-500 mt-2">
@@ -40,10 +39,9 @@ const Home = () => {
         </p>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
-          {/* Hotel Card */}
           <div className="bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition">
             <img
-              src="https://source.unsplash.com/400x300/?luxury,hotel"
+              src="bg-[url(public/Assets/istockphoto-1448506100-612x612.jpg)]"
               alt="Hotel"
               className="w-full h-48 object-cover"
             />
@@ -56,10 +54,9 @@ const Home = () => {
             </div>
           </div>
 
-          {/* Restaurant Card */}
           <div className="bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition">
             <img
-              src="https://source.unsplash.com/400x300/?restaurant,food"
+              src="public/Assets/luxury-classic-modern-bedroom-suite-hotel_105762-1787.avif"
               alt="Restaurant"
               className="w-full h-48 object-cover"
             />
@@ -74,7 +71,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Why Choose Us Section */}
       <section className="bg-gray-100 py-16">
         <div className="max-w-6xl mx-auto px-6 text-center">
           <h2 className="text-3xl font-bold text-gray-800">Why Choose StayEase?</h2>

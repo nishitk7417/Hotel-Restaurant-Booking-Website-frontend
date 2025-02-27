@@ -24,10 +24,15 @@ const Register = () => {
     setError("");
 
     try {
-      const response = await axios.post("http://localhost:8000/api/v1/users/register", formData);
+      const response = await axios.post(
+        "/api/v1/users/register",
+        formData,
+        { withCredentials: true }
+      );
+
       if (response.data.success) {
         alert("Registration Successful! Please login.");
-        navigate("/login");
+        navigate("/login"); // Redirect to login after registration
       }
     } catch (err) {
       setError(err.response?.data?.message || "Registration failed");
@@ -35,10 +40,11 @@ const Register = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-96">
+    <div className="flex justify-center items-center min-h-screen bg-[url(public/Assets/360_F_653012686_damKXIEkKFYgwiHfdCTiwgOiuon6dAP8.jpg)]">
+      <div className="bg-white p-8 rounded-lg mx-6 shadow-lg w-96">
         <h2 className="text-2xl font-semibold text-center text-gray-700">Register</h2>
         {error && <p className="text-red-500 text-center mt-2">{error}</p>}
+
         <form onSubmit={handleSubmit} className="mt-4">
           <input
             type="text"
@@ -85,6 +91,7 @@ const Register = () => {
             <option value="Customer">Customer</option>
             <option value="Vendor">Vendor</option>
           </select>
+
           <button
             type="submit"
             className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-lg transition duration-300"
@@ -92,6 +99,7 @@ const Register = () => {
             Register
           </button>
         </form>
+
         <p className="text-center mt-4">
           Already have an account?{" "}
           <a href="/login" className="text-blue-500 hover:underline">

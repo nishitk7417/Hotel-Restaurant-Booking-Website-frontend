@@ -2,10 +2,10 @@ import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   return (
-    <div className="w-64 h-screen bg-gray-900 text-white flex flex-col p-5">
+    <div className="w-64 h-screen bg-gray-900 text-white flex flex-col px-5 pt-[6rem]">
       <h2 className="text-2xl font-bold mb-5">Dashboard</h2>
       <nav className="flex flex-col space-y-3">
-        <Link className="hover:bg-gray-700 p-3 rounded" to="/dashboard">
+        <Link className="hover:bg-gray-700 p-3 rounded" to="/customer-dashboard">
           My Bookings
         </Link>
         <Link className="hover:bg-gray-700 p-3 rounded" to="/profile">

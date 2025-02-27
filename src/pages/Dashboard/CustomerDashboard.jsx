@@ -40,7 +40,7 @@ const CustomerDashboard = () => {
   return (
     <div className="flex">
       <Sidebar />
-      <div className="flex-1 p-10">
+      <div className="flex-1 pt-[7rem] px-8">
         <h1 className="text-3xl font-bold mb-5">My Bookings</h1>
 
         {error ? (

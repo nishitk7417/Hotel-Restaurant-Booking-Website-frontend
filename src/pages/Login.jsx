@@ -1,43 +1,57 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setError("");
 
     try {
-      const response = await fetch("http://localhost:8000/api/v1/users/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password })
-      });
-    //   console.log(response);
-      
-      const data = await response.json();
-      console.log(data)
+      const response = await axios.post(
+        "/api/v1/users/login",
+        { email, password },
+        { withCredentials: true } // Ensures cookies are sent/received
+      );
 
-      if (response.ok) {
-        localStorage.setItem("token", data.data.accessToken);
-        localStorage.setItem("role", data.data.user.role);
+      console.log("Login response:", response.data);
+
+      const userToken = response.data?.data?.accessToken;
+      const userRole = response.data?.data?.user?.role;
+      if (!userRole) {
+        throw new Error("User role not found");
+      }
+
+      // Store role in localStorage (token is in cookies)
+      localStorage.setItem("role", userRole);
+      localStorage.setItem("token", userToken);
+
+      // Redirect based on user role
+      if (userRole === "Customer") {
         navigate("/customer-dashboard");
+      } else if (userRole === "Vendor") {
+        navigate("/vendor-dashboard");
       } else {
-        alert(data.message || "Login failed!");
+        navigate("/");
       }
     } catch (error) {
-      console.error("Error logging in:", error);
-      alert("Something went wrong. Try again!");
+      console.error("Login error:", error);
+      setError(error.response?.data?.message || "Invalid email or password!");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-50">
-      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+    <div className="flex justify-center items-center min-h-screen bg-[url('/Assets/360_F_653012686_damKXIEkKFYgwiHfdCTiwgOiuon6dAP8.jpg')] bg-cover bg-center">
+      <div className="bg-white p-8 rounded-lg shadow-md w-full mx-6 max-w-md">
         <h2 className="text-3xl font-bold text-center text-gray-800">Login</h2>
         <p className="text-gray-500 text-center mt-2">Access your account</p>
 
@@ -66,11 +80,14 @@ const Login = () => {
             />
           </div>
 
+          {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+
           <button
             type="submit"
-            className="w-full mt-4 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
+            className="w-full mt-4 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition disabled:opacity-50"
+            disabled={loading}
           >
-            Login
+            {loading ? "Logging in..." : "Login"}
           </button>
         </form>
 

@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 const RestaurantList = () => {
   const [restaurants, setRestaurants] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [userRole, setUserRole] = useState(null);
 
   useEffect(() => {
@@ -20,28 +19,22 @@ const RestaurantList = () => {
         }
       } catch (error) {
         console.error("Error fetching listings:", error);
-      } finally {
-        setLoading(false);
       }
     };
 
     fetchListings();
 
-    // Get user role from localStorage (assuming it's stored after login)
     const storedRole = localStorage.getItem("role"); // Example: "vendor" or "customer"
     setUserRole(storedRole);
   }, []);
 
-  if (loading) return <p className="text-center text-xl mt-10">Loading...</p>;
-  if (restaurants.length === 0) return <p className="text-center text-xl mt-10">No restaurants available.</p>;
+  if (restaurants.length === 0) return <p className="text-center text-4xl pt-[8rem] font-medium">No restaurants available.</p>;
 
   return (
     <div className="max-w-6xl mx-auto p-6 pt-30">
-      {/* Header with conditional action buttons */}
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-4xl font-bold">Popular Restaurants</h1>
 
-        {/* Show action buttons only for vendors */}
         {userRole === "Vendor" && (
           <div className="space-x-3">
             <Link
@@ -66,7 +59,6 @@ const RestaurantList = () => {
         )}
       </div>
 
-      {/* Restaurant Listings */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {restaurants.map((restaurant) => (
           <div key={restaurant._id} className="bg-white shadow-lg rounded-lg overflow-hidden">
