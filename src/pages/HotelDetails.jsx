@@ -29,10 +29,10 @@ const HotelList = () => {
     setUserRole(storedRole);
   }, []);
 
-  if (hotels.length === 0) return <p className="text-center text-4xl pt-[8rem] font-medium">No hotels available.</p>;
+  if (hotels.length === 0) return <p className="text-center text-4xl pt-6 font-medium">No hotels available.</p>;
 
   return (
-    <div className="max-w-6xl mx-auto p-6 pt-30">
+    <div className="max-w-6xl mx-auto p-6">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-4xl font-bold">Popular Hotels</h1>
 

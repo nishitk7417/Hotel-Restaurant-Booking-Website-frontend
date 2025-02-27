@@ -1,11 +1,13 @@
 import React from 'react';
-import Sidebar from './components/Sidebar.jsx'
+import Sidebar from '../components/Sidebar'
 
 function Profile() {
   return (
-    <div>
+    <div className='flex'>
         <Sidebar/>
-      
+        <div>
+          hoo
+        </div>
     </div>
   )
 }

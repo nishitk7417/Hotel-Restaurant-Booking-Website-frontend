@@ -25,7 +25,7 @@ const Navbar = () => {
   const dashboardPath = userRole === "Customer" ? "/customer-dashboard" : "/vendor-dashboard";
 
   return (
-    <nav className="shadow-lg fixed flex items-center w-full h-[5rem] rounded-b-lg z-50 bg-white">
+    <nav className="shadow-lg flex items-center w-full h-[5rem] rounded-b-lg z-50 ">
       <div className="max-w-7xl mx-auto px-4 w-full sm:px-6 lg:px-8 flex justify-between items-center">
         
         <Link to="/" className="text-4xl font-bold text-gray-600">
